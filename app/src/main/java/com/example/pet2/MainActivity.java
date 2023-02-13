@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -11,6 +12,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView mTextView;
     EditText petID;
+    ImageView imgPet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mTextView = (TextView) findViewById(R.id.textView);
         petID = (EditText) findViewById(R.id.petID);
+        imgPet = (ImageView) findViewById(R.id.imageView);
     }
 
     public void onClick(View view) {
@@ -53,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                         Tags = Tags + "\nTag id: " + i.getId() +
                                 "\nTag name: " + i.getName();
                     }
-
+                    Picasso.get().load(result.getPhotoUrls().get(0)).into(imgPet);
                     mTextView.setText("Id: " + result.getId().toString() +
                             "\nCategory id: " + result.getCategory().getId() +
                             "\nCategory name: " + result.getCategory().getName() +
